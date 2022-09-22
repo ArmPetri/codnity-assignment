@@ -1,17 +1,38 @@
-import React from 'react';
+import { ThemeProvider, createTheme, responsiveFontSizes, CssBaseline } from '@mui/material';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {store} from './redux/store'
+import { Provider } from 'react-redux'
+
+let theme = createTheme({
+  palette: {
+    primary: {
+      main: "#fff",
+      light: "#BEBBBB"
+    },
+    secondary: {
+      main: "#29335C"
+    },
+    success: {
+      main: "#337357"
+    },
+    error: {
+      main: "#DB2B39"
+    }
+  },
+})
+
+theme = responsiveFontSizes(theme);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+      <CssBaseline>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+      </CssBaseline>
+    </Provider>,
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
